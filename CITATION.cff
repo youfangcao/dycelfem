@@ -54,8 +54,6 @@ references:
   - type: data
     title: "DyCelFEM wound-healing simulation data: published 2014 run and v1.0 reproduction"
     authors:
-      - family-names: Zhao
-        given-names: Jieling
       - family-names: Cao
         given-names: Youfang
         orcid: "https://orcid.org/0000-0002-5880-0006"
