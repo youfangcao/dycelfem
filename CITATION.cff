@@ -49,6 +49,21 @@ abstract: >-
   cell, allowing tissue-scale healing dynamics to emerge from subcellular
   signalling.
 
+# The simulation output that accompanies this software.
+references:
+  - type: data
+    title: "DyCelFEM wound-healing simulation data: published 2014 run and v1.0 reproduction"
+    authors:
+      - family-names: Zhao
+        given-names: Jieling
+      - family-names: Cao
+        given-names: Youfang
+        orcid: "https://orcid.org/0000-0002-5880-0006"
+    doi: "10.5281/zenodo.21986446"
+    year: 2026
+    publisher:
+      name: Zenodo
+
 # The paper. Tools that support it will cite this in preference to the software
 # entry above.
 preferred-citation:

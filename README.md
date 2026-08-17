@@ -285,6 +285,15 @@ That DOI is the *concept* DOI — it always resolves to the newest release. To
 pin a specific version, cite v1.0 as
 [10.5281/zenodo.21985816](https://doi.org/10.5281/zenodo.21985816).
 
+**Data**
+
+The simulation output — the published 2014 run and a v1.0 reproduction, from
+byte-identical inputs — is archived separately:
+
+> Zhao J, Cao Y. *DyCelFEM wound-healing simulation data: published 2014 run and
+> v1.0 reproduction.* Zenodo.
+> doi:[10.5281/zenodo.21986446](https://doi.org/10.5281/zenodo.21986446)
+
 `CITATION.cff` in this repository carries the same information in machine
 -readable form; GitHub's "Cite this repository" button reads it.
 
