@@ -1,5 +1,8 @@
 # DyCelFEM
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21985815.svg)](https://doi.org/10.5281/zenodo.21985815)
+[![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](LICENSE)
+
 Multiscale modelling and simulation of cell dynamics: a dynamic finite-element
 tissue mechanics model coupled to per-cell stochastic reaction networks read
 from SBML, with diffusion between neighbouring cells.
@@ -261,6 +264,29 @@ from the build and needs `anyoption.h`, which is not part of this package.
 `libBioModel/debug.h` is a reconstruction: the original was missing from the
 archive, and every reference to it is a bare `#include` or a commented-out
 diagnostic, so an empty header reproduces a release build.
+
+## Citing
+
+Please cite both the paper and the software.
+
+**Paper**
+
+> Cao Y, Zhao J, Chen L, DiPietro LA, Liang J. *Spatio-temporal multiscale cell
+> modeling of skin wound healing.* Biophysical Journal (2026).
+> doi:[10.1016/j.bpj.2026.03.021](https://doi.org/10.1016/j.bpj.2026.03.021)
+
+**Software**
+
+> Zhao J, Cao Y. *DyCelFEM: dynamic finite-element modelling of multiscale cell
+> dynamics* (v1.0). Zenodo.
+> doi:[10.5281/zenodo.21985815](https://doi.org/10.5281/zenodo.21985815)
+
+That DOI is the *concept* DOI — it always resolves to the newest release. To
+pin a specific version, cite v1.0 as
+[10.5281/zenodo.21985816](https://doi.org/10.5281/zenodo.21985816).
+
+`CITATION.cff` in this repository carries the same information in machine
+-readable form; GitHub's "Cite this repository" button reads it.
 
 ## Credits
 

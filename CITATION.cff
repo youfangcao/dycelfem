@@ -17,6 +17,17 @@ authors:
     orcid: "https://orcid.org/0000-0002-5880-0006"
 
 repository-code: "https://github.com/youfangcao/dycelfem"
+
+# The concept DOI: always resolves to the newest release.
+doi: "10.5281/zenodo.21985815"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21985815"
+    description: "Concept DOI — resolves to the latest version"
+  - type: doi
+    value: "10.5281/zenodo.21985816"
+    description: "DOI for version 1.0"
+
 license: BSD-3-Clause
 # Copyright is held by the University; see LICENSE.
 copyright: "2026 The Board of Trustees of the University of Illinois"
