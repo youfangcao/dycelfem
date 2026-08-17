@@ -21,7 +21,7 @@ Technology Manager, August 2026).
 > 3. I think it would be good to have this technology in our records, if you
 >    don't mind submitting a disclosure.
 
-### One deliberate deviation, and why
+### One deviation from that label — confirmed by OTM
 
 The final sentence of the supplied label — *"Permission to use these materials
 may be obtained from the University of Illinois"* — is standard university
@@ -41,11 +41,18 @@ text, and is not in conflict, because the licence grant immediately follows and
 defines which rights are licensed. Only the "permission may be obtained"
 sentence is omitted.
 
-This is the reading that matches point 1 of the same email, where the
-BSD 3-Clause licence was approved. If OTM would prefer the sentence retained
-somewhere, the right place is a `NOTICE` file or the repository description —
-not `LICENSE`, where it would contradict the grant. Worth a one-line
-confirmation to Clare Harper if you want it on the record.
+This reading matches point 1 of the same email, where the BSD 3-Clause licence
+was approved. It was put to OTM explicitly and confirmed:
+
+> **Youfang Cao:** Just to confirm — since BSD 3-Clause itself grants permission
+> to use, I've used "Copyright (c) 2026, The Board of Trustees of the University
+> of Illinois. All rights reserved." as the notice and omitted the sentence
+> about obtaining permission, which would contradict the licence grant.
+>
+> **Clare Harper, PhD (UIC OTM):** That is fine, thank you for checking.
+
+So the omission is authorised, not assumed. Nothing further is outstanding on
+the licence text.
 
 ### Year
 
@@ -120,18 +127,28 @@ and Zhao only. The other three are credited through `preferred-citation`, which
 points at the Biophysical Journal paper. Anyone who contributed code not visible
 in the file headers should be added.
 
-## Checklist before the first public push
+## Release checklist
 
-- [x] Jieling Zhao's written agreement — obtained
-- [x] UIC OTM approval, in writing — Clare Harper, August 2026
-- [x] Copyright holder set in `LICENSE`
-- [x] SPDX headers applied to 45 files
-- [ ] Submit the UIC invention disclosure (requested by OTM):
+Done:
+
+- [x] Jieling Zhao's written agreement
+- [x] UIC OTM approval in writing — Clare Harper, August 2026
+- [x] Copyright holder set in `LICENSE`, with the "permission may be obtained"
+      sentence omitted and that omission confirmed by OTM
+- [x] SPDX headers on 45 files
+- [x] `CITATION.cff` — ORCID, repository URL, release date, both DOIs
+- [x] `.zenodo.json` so Zenodo uses our metadata rather than guessing
+- [x] Published: https://github.com/youfangcao/dycelfem
+- [x] Tagged `v1.0`, archived on Zenodo
+      — concept DOI [10.5281/zenodo.21985815](https://doi.org/10.5281/zenodo.21985815)
+      — v1.0 DOI [10.5281/zenodo.21985816](https://doi.org/10.5281/zenodo.21985816)
+- [x] `.svn/` and the publisher PDF kept out of the repository (the repo is
+      rooted at the package directory, which contains neither)
+
+Outstanding:
+
+- [ ] Submit the UIC invention disclosure, which OTM asked for:
       https://otm.uic.edu/resources/community-support/submit-your-idea-2/
-- [x] `CITATION.cff` — ORCID, repository URL, release date filled in
+- [ ] Publish the simulation data record on Zenodo and add its DOI here,
+      in `README.md`, and in `CITATION.cff`
 - [ ] Add volume/issue/pages to `CITATION.cff` once the BJ proof is paginated
-- [ ] Exclude `.svn/` — it still holds pre-edit blobs and the original
-      `file:///D:/Repositories/FECells` path
-- [ ] Do not commit `Cao et al. BJ2026.pdf` (24 MB, publisher copyright)
-- [ ] Put large data (the 16 MB tissue file, result sets) on Zenodo, not git
-- [ ] Tag a release and link the repository to Zenodo for a citable DOI
