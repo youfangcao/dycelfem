@@ -1,0 +1,35 @@
+{
+  "upload_type": "software",
+  "title": "DyCelFEM: dynamic finite-element modelling of multiscale cell dynamics",
+  "version": "1.0",
+  "license": "bsd-3-clause",
+  "description": "<p>DyCelFEM simulates skin wound healing by coupling a deformable finite-element representation of individual cells to SBML-encoded intracellular reaction networks and inter-cell cytokine diffusion. Cell mechanics, growth, division, apoptosis and chemotactic migration are driven by the molecular state of each cell, so tissue-scale healing dynamics emerge from subcellular signalling.</p><p>This is the simulation code accompanying Cao et al., <em>Spatio-temporal multiscale cell modeling of skin wound healing</em>, Biophysical Journal (2026), doi:10.1016/j.bpj.2026.03.021.</p><p>Copyright &copy; 2026 The Board of Trustees of the University of Illinois. Released under the BSD 3-Clause licence.</p>",
+  "creators": [
+    {
+      "name": "Zhao, Jieling",
+      "affiliation": "University of Illinois Chicago"
+    },
+    {
+      "name": "Cao, Youfang",
+      "affiliation": "University of Illinois Chicago",
+      "orcid": "0000-0002-5880-0006"
+    }
+  ],
+  "keywords": [
+    "wound healing",
+    "multiscale modelling",
+    "finite element method",
+    "agent-based model",
+    "systems biology",
+    "SBML",
+    "cell mechanics"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.1016/j.bpj.2026.03.021",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-article",
+      "scheme": "doi"
+    }
+  ]
+}
