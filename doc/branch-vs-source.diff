@@ -1,0 +1,91 @@
+--- branch_dsq9_simpleoutput/dbReader.cpp	2014-09-16 19:06:19
++++ source/dbReader.cpp	2015-02-10 10:13:14
+@@ -232,7 +232,7 @@
+ 				int dead = atoi(array1[1].c_str());
+ 				int set_dead = atoi(array1[2].c_str());
+ 				int migrate = atoi(array1[3].c_str());
+-				int soften = atoi(array1[4].c_str());
++				int mAngle = atoi(array1[4].c_str());
+ 				int type = atoi(array1[5].c_str());
+ 				double iarea = atof(array1[8].c_str());
+ 				int nspecies = atoi(array1[9].c_str()); // YFC: READ STATE VECTOR LENGTH
+@@ -244,8 +244,8 @@
+ 				else if (set_dead==1) {cellList[cid]->set_set_dead(true);}
+ 				if      (migrate==0) {cellList[cid]->set_migrate(false);}
+ 				else if (migrate==1) {cellList[cid]->set_migrate(true);}
+-				if      (soften==0) {cellList[cid]->set_soften(false);}
+-				else if (soften==1) {cellList[cid]->set_soften(true);}	
++				//if      (soften==0) {cellList[cid]->set_soften(false);}
++				//else if (soften==1) {cellList[cid]->set_soften(true);}
+ 				cellList[cid]->set_cell_type(type);
+ 				cellList[cid]->set_r(CR);
+ 				cellList[cid]->set_life(number);
+@@ -253,6 +253,7 @@
+ 				cellList[cid]->setup_tcoef(tension_edge_class[type]);
+ 				cellList[cid]->setup_pcoef(pressure_edge_class[type]);
+ 				cellList[cid]->setup_mcoef(mass_edge_class[type]);
++                cellList[cid]->set_center(atof(array1[6].c_str()), atof(array1[7].c_str()));
+ 				// YFC: READ CELL STATE
+ 				for (int j=0; j<nspecies; j++)
+ 				{
+@@ -888,7 +889,7 @@
+ 	string tmps = temp.str();
+ 	string cname = "printout"+tmps+".txt";
+ 	ofstream OUT (cname.c_str());
+-	/*OUT<<"#######################\n# Cell Growth Project #\n# Sample Database     #\n#######################"<<endl;
++	/**/OUT<<"#######################\n# Cell Growth Project #\n# Sample Database     #\n#######################"<<endl;
+ 	OUT<<"Point-based\n"<<endl;
+ 	OUT<<"# This is the bounds of your viewing window plane in VRC coordinates"<<endl;
+ 	OUT<<"u -100.0,100.0\nv -75.0,75.0"<<endl;
+@@ -920,7 +921,7 @@
+ 		int p2_id = edgeList[i]->p2()->id();
+ 		OUT<<index<<","<<p1_id<<","<<p2_id<<endl;
+ 	}
+-	OUT<<"END_EDGE_LIST"<<endl;*/
++	OUT<<"END_EDGE_LIST"<<endl;
+ 	OUT<<"#ID,Dead,S_Dead,Mig,mAng,Type,X,Y,Area,N_Species,Species0,Species1,..."<<endl;
+ 	OUT<<"CELL_LIST"<<endl;
+ 	for (int i=0;i<cn;i++)
+@@ -986,7 +987,7 @@
+ 		OUT<<endl;
+ 	}
+ 	OUT<<"END_PAIR_LIST"<<endl;
+-	/*OUT<<"NODE_LIST"<<endl;
++	/**/OUT<<"NODE_LIST"<<endl;
+ 	for (int i=0;i<nn;i++)
+ 	{
+ 		int index = nodeList[i]->id();
+@@ -1062,10 +1063,10 @@
+ 			}
+ 		}
+ 	}
+-	OUT<<"END_MIGR_CELL_LIST"<<endl;*/
++	OUT<<"END_MIGR_CELL_LIST"<<endl;
+ 	OUT.close();
+ 	t_e_c = clock();
+ 	cout<<"Print out data file done: "<<(t_e_c-t_b_c)*0.001<<" seconds!"<<endl;
+ }
+ 
+-#endif
+\ No newline at end of file
++#endif
+--- branch_dsq9_simpleoutput/point3D.cpp	2014-09-16 18:48:23
++++ source/point3D.cpp	2015-02-10 10:14:48
+@@ -751,6 +751,7 @@
+ 	migrate_relax = false;
+ 	migrate_angle = -1;
+ 	mark_number = 0; // default
++	mAngle = 0;
+ 	soften = false;
+ 	migrate_response = false;
+ 	circle = true;
+--- branch_dsq9_simpleoutput/point3D.h	2014-04-28 14:57:28
++++ source/point3D.h	2015-02-10 10:16:18
+@@ -314,6 +314,7 @@
+ 		double sense_migr_vec[2]; // mechanical signal strength and orientation in response with migration
+ 		double sense_migr_angle; // mechanical signal direction: keep for 3 steps
+ 		int mark_number; // 0: normal; 1: migrate; 2:soften
++		int mAngle;  // migration angle
+ 		bool soften;     // the cell is soften
+ 		bool migrate_response; // the cells on the counter direction of migration
+ 		int cell_status; // -1: shrink; 0: static; 1: grow

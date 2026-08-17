@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2" level="2" version="1">
+  <model id="common">
+    <listOfCompartments>
+      <compartment id="default" size="1"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="WoundSignal" name="WoundSignal" compartment="default" initialAmount="0" charge="0"/>
+      <species id="Clot" name="Clot" compartment="default" initialAmount="0" charge="0"/>
+      <species id="Collagen" name="Collagen" compartment="default" initialAmount="0" charge="0"/>
+      <species id="PDGF" name="PDGF" compartment="default" initialAmount="0" charge="0"/>
+      <species id="KGF" name="KGF" compartment="default" initialAmount="0" charge="0"/>
+      <species id="IL1" name="IL1" compartment="default" initialAmount="0" charge="0"/>
+      <species id="TGFb1" name="TGFb1" compartment="default" initialAmount="0" charge="0"/>
+      <species id="Procollagen" name="Procollagen" compartment="default" initialAmount="0" charge="0"/>
+      <species id="MMP" name="MMP" compartment="default" initialAmount="0" charge="0"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="D_WoundSignal" value="5.0E-12" unit="cm^2 / sec"/>
+          <notes> WoundSignal diffuses very slowly. </notes>
+      <parameter id="D_clot" value="0.0" unit="cm^2 / sec"/>
+          <notes> Clot does not diffuse. </notes>
+      <parameter id="D_collagen" value="0.0" unit="cm^2 / sec"/>
+          <notes> Collagen does not diffuse. </notes>
+      <parameter id="D_PDGF" value="2.78E-9" unit="cm^2 / sec"/>
+          <notes>
+            Haugh, J, Biophysical Journal 90:2297-2308, 2006. The diffusion of PDGF in the dermis is
+            approximately one thirtieth of its value in solution. 2.78E-8 seems too large, so /5: 5.56E-9
+          </notes>
+      <parameter id="D_KGF" value="1.0E-9" unit="cm^2 / sec"/>
+          <notes> Not yet justified. </notes>
+      <parameter id="D_IL1" value="1.0E-10" unit="cm^2 / sec"/>
+          <notes>
+            ??? Thorne, R. J Neurophysiol 92: 3471-3481, 2004. 5.18E-9 too fast? 
+          </notes>
+      <parameter id="D_TGFb1" value="1.0E-10" unit="cm^2 / sec"/>
+      <parameter id="D_Procollagen" value="5.0E-11" unit="cm^2 / sec"/>
+      <parameter id="D_MMP" value="8.0E-9" unit="cm^2 / sec"/>
+          <notes> Not yet justified. </notes>
+      <parameter id="DeltaT" value="60.0" unit="min"/>
+      <notes> It was 60.0 min. Need to justify. </notes>
+      <parameter id="D0" value="8.5E6"/>
+          <notes> Scaling factor convert cm^2/sec to cell/min, assume cell diameter is 30 micrometer. D0 = 1E8/(pi*(30/2)^2)*60. </notes>
+    </listOfParameters>
+  </model>
+</sbml>

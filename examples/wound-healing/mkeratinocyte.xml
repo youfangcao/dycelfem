@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2" level="2" version="1">
+  <model id="keratinocyte">
+    <listOfCompartments>
+      <compartment id="default" size="1"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="WoundSignal" name="WoundSignal" compartment="default" initialAmount="0" charge="0"/>
+      <species id="Clot" name="Clot" compartment="default" initialAmount="0" charge="0"/>
+      <species id="Collagen" name="Collagen" compartment="default" initialAmount="0" charge="0"/>
+      <species id="PDGF" name="PDGF" compartment="default" initialAmount="0" charge="0"/>
+      <species id="KGF" name="KGF" compartment="default" initialAmount="0" charge="0"/>
+      <species id="IL1" name="IL1" compartment="default" initialAmount="0" charge="0"/>
+      <species id="TGFb1" name="TGFb1" compartment="default" initialAmount="0" charge="0"/>
+      <species id="Procollagen" name="Procollagen" compartment="default" initialAmount="0" charge="0"/>
+      <species id="MMP" name="MMP" compartment="default" initialAmount="0" charge="0"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="KS_IL1" value="0.0" constant="false"/>
+      <parameter id="KSMAX_IL1" value="0.5"/>
+      <parameter id="N_IL1" value="1"/>
+      <parameter id="KD_KGF_IL1" value="1"/>
+
+      <parameter id="KD_KGF" value="4.998E-2"/>
+      <parameter id="KD_IL1" value="1.0E-3"/>
+
+      <parameter id="MigForce" value="0.0" constant="false"/>
+      <parameter id="n_MigForce" value="1"/>
+      <parameter id="Max_MigForce" value="1"/>
+      <parameter id="KD_KGF_MF" value="100" unit="nM"/>
+
+      <parameter id="Prob_DoNothing" value="1.0"/>
+      <parameter id="Prob_GrowthDiv" value="0.0" constant="false"/>
+      <parameter id="Prob_Migration" value="0.0" constant="false"/>
+      <parameter id="Prob_Apoptosis" value="0.001"/>
+
+      <parameter id="n_GrowthDiv" value="1"/>
+      <parameter id="Pmax_GrowthDiv" value="0.1"/>
+      <parameter id="KD_KGF_GD" value="100" unit="nM"/>
+
+      <parameter id="n_Migration" value="1"/>
+      <parameter id="Pmax_Migration" value="40"/>
+      <parameter id="KD_KGF_MG" value="100" unit="nM"/>
+    </listOfParameters>
+
+    <listOfRules>
+      <assignmentRule variable="MigForce">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply>
+          <plus/>
+          <cn> 1.0 </cn>
+          <apply>
+            <times/>
+            <ci> Max_MigForce </ci>
+            <apply>
+              <divide/>
+              <apply>
+                  <power/>
+                  <ci> KGF </ci>
+                  <ci> n_MigForce </ci>
+              </apply>
+              <apply>
+                  <plus/>
+                  <ci> KD_KGF_MF </ci>
+                  <apply>
+                    <power/>
+                    <ci> KGF </ci>
+                    <ci> n_MigForce </ci>
+                  </apply>
+              </apply>
+            </apply>
+          </apply>
+        </apply>
+        </math>
+      </assignmentRule>
+
+      <assignmentRule variable="Prob_GrowthDiv">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply>
+          <plus/>
+          <cn> 0.001 </cn>
+          <apply>
+            <times/>
+            <ci> Pmax_GrowthDiv </ci>
+            <apply>
+              <divide/>
+              <apply>
+                  <power/>
+                  <ci> KGF </ci>
+                  <ci> n_GrowthDiv </ci>
+              </apply>
+              <apply>
+                  <plus/>
+                  <ci> KD_KGF_GD </ci>
+                  <apply>
+                    <power/>
+                    <ci> KGF </ci>
+                    <ci> n_GrowthDiv </ci>
+                  </apply>
+              </apply>
+            </apply>
+          </apply>
+        </apply>
+        </math>
+      </assignmentRule>
+
+      <assignmentRule variable="Prob_Migration">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply>
+          <plus/>
+          <cn> 0.01 </cn>
+          <apply>
+            <times/>
+            <ci> Pmax_Migration </ci>
+            <apply>
+              <divide/>
+              <apply>
+                  <power/>
+                  <ci> KGF </ci>
+                  <ci> n_Migration </ci>
+              </apply>
+              <apply>
+                  <plus/>
+                  <ci> KD_KGF_MG </ci>
+                  <apply>
+                    <power/>
+                    <ci> KGF </ci>
+                    <ci> n_Migration </ci>
+                  </apply>
+              </apply>
+            </apply>
+          </apply>
+        </apply>
+        </math>
+      </assignmentRule>
+
+      <assignmentRule variable="KS_IL1">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> KSMAX_IL1 </ci>
+            <apply>
+              <divide/>
+              <apply>
+                  <power/>
+                  <ci> KGF </ci>
+                  <ci> N_IL1 </ci>
+              </apply>
+              <apply>
+                  <plus/>
+                  <ci> KD_KGF_IL1 </ci>
+                  <apply>
+                    <power/>
+                    <ci> KGF </ci>
+                    <ci> N_IL1 </ci>
+                  </apply>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+    </listOfRules>
+
+    <listOfReactions>
+      <reaction id="SynIL1" reversible="false" fast="false">
+        <listOfProducts>
+          <speciesReference species="IL1"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> default </ci>
+              <ci> KS_IL1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+
+      <reaction id="DegKGF" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="KGF"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> default </ci>
+              <ci> KD_KGF </ci>
+              <ci> KGF </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+
+      <reaction id="DegIL1" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="IL1"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> default </ci>
+              <ci> KD_IL1 </ci>
+              <ci> IL1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

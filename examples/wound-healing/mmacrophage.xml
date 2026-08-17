@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2" level="2" version="1">
+  <model id="macrophage">
+    <listOfCompartments>
+      <compartment id="default" size="1"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="WoundSignal" name="WoundSignal" compartment="default" initialAmount="0" charge="0"/>
+      <species id="Clot" name="Clot" compartment="default" initialAmount="0" charge="0"/>
+      <species id="Collagen" name="Collagen" compartment="default" initialAmount="0" charge="0"/>
+      <species id="PDGF" name="PDGF" compartment="default" initialAmount="0" charge="0"/>
+      <species id="KGF" name="KGF" compartment="default" initialAmount="0" charge="0"/>
+      <species id="IL1" name="IL1" compartment="default" initialAmount="0" charge="0"/>
+      <species id="TGFb1" name="TGFb1" compartment="default" initialAmount="0" charge="0"/>
+      <species id="Procollagen" name="Procollagen" compartment="default" initialAmount="0" charge="0"/>
+      <species id="MMP" name="MMP" compartment="default" initialAmount="0" charge="0"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="ksmax_PDGF" value="8.0"/>
+      <parameter id="KD_WS_PDGF" value="50"/>
+      <parameter id="n_PDGF" value="3"/>
+
+      <parameter id="ksmax_TGFb1" value="0.5"/>
+      <parameter id="ks0_TGFb1" value="0.0"/>
+      <parameter id="KD_PDGF_TGFb1" value="50"/>
+      <parameter id="n_TGFb1" value="1"/>
+
+      <parameter id="ks_egf" value="0.0"/>
+      <parameter id="ks_kgf" value="0"/>
+
+      <parameter id="kd_IL1" value="1.0e-3"/>
+      
+      <parameter id="kd_woundsignal" value="5E-5"/>
+      <parameter id="kd_kgf" value="4.998E-3"/>
+      <parameter id="kd_pdgf" value="1.668e-3"/>
+      <parameter id="kd_tgfb1" value="2.458E-4"/>
+      <notes> Menon et al. 2012.  </notes>
+      <parameter id="kd_mmp" value="1.0E-3"/>
+      <parameter id="Prob_DoNothing" value="1.0"/>
+      <parameter id="Prob_GrowthDiv" value="0.0"/>
+      <parameter id="Prob_Migration" value="0.0"/>
+      <parameter id="Prob_Apoptosis" value="0.01"/>
+      <parameter id="mapoptosis0" value="0.01"/>
+      <parameter id="mapoptosis_1" value="0.005"/>
+      <parameter id="mapoptosis_2" value="1"/>
+      <parameter id="mapoptosis_3" value="1"/>
+    </listOfParameters>
+    <listOfRules>
+      <assignmentRule variable="Prob_Apoptosis">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> mapoptosis0 </ci>
+              <ci> mapoptosis_1 </ci>
+              <apply>
+                <plus/>
+                <cn> 1 </cn>
+                <apply>
+                  <times/>
+                  <ci> mapoptosis_2 </ci>
+                </apply>
+              </apply>
+              <apply>
+                <plus/>
+                <cn> 1 </cn>
+                <apply>
+                  <times/>
+                  <ci> mapoptosis_3 </ci>
+                  <ci> TGFb1 </ci>
+                </apply>
+              </apply>
+            </apply>
+        </math>
+      </assignmentRule>
+    </listOfRules>
+    <listOfReactions>
+      <reaction id="SynPDGF" reversible="false" fast="false">
+        <listOfProducts>
+          <speciesReference species="PDGF"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> ksmax_PDGF </ci>
+                <apply>
+                    <power/>
+                    <ci> WoundSignal </ci>
+                    <ci> n_PDGF </ci>
+                </apply>
+              </apply>
+              <apply>
+                <plus/>
+                <ci> KD_WS_PDGF </ci>
+                <apply>
+                  <power/>
+                  <ci> WoundSignal </ci>
+                  <ci> n_PDGF </ci>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="SynTGFb1" reversible="false" fast="false">
+        <listOfProducts>
+          <speciesReference species="TGFb1"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <ci> ks0_TGFb1 </ci>
+              <apply>
+                <divide/>
+                <apply>
+                  <times/>
+                  <ci> ksmax_TGFb1 </ci>
+                  <apply>
+                      <power/>
+                      <ci> PDGF </ci>
+                      <ci> n_TGFb1 </ci>
+                  </apply>
+                </apply>
+                <apply>
+                  <plus/>
+                  <ci> KD_PDGF_TGFb1 </ci>
+                  <apply>
+                    <power/>
+                    <ci> PDGF </ci>
+                    <ci> n_TGFb1 </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="DegWS" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="WoundSignal"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> default </ci>
+              <ci> kd_woundsignal </ci>
+              <ci> WoundSignal </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="DegPDGF" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="PDGF"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> default </ci>
+              <ci> kd_pdgf </ci>
+              <ci> PDGF </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="DegIL1" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="IL1"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> default </ci>
+              <ci> kd_IL1 </ci>
+              <ci> IL1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="DegTGFb1" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="TGFb1"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> default </ci>
+              <ci> kd_tgfb1 </ci>
+              <ci> TGFb1 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="DegKGF" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="KGF"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> default </ci>
+              <ci> kd_kgf </ci>
+              <ci> KGF </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>

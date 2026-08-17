@@ -1,0 +1,8 @@
+bin/
+build/
+third_party/
+out/
+analysis/
+*.mp4
+.DS_Store
+*.tar.gz

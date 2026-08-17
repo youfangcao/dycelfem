@@ -1,0 +1,64 @@
+# Citation File Format 1.2.0 -- https://citation-file-format.github.io/
+# GitHub and Zenodo both render this and offer a "Cite this repository" button.
+cff-version: 1.2.0
+title: "DyCelFEM: dynamic finite-element modelling of multiscale cell dynamics"
+message: >-
+  If you use this software, please cite both the software itself and the
+  paper it implements (listed under preferred-citation).
+type: software
+
+# Authors of the SOFTWARE. These are the two people who wrote the code, taken
+# from the file headers; the paper below has five authors.
+authors:
+  - family-names: Zhao
+    given-names: Jieling
+  - family-names: Cao
+    given-names: Youfang
+    orcid: "https://orcid.org/0000-0002-5880-0006"
+
+repository-code: "https://github.com/youfangcao/dycelfem"
+license: BSD-3-Clause
+# Copyright is held by the University; see LICENSE.
+copyright: "2026 The Board of Trustees of the University of Illinois"
+version: "1.0"
+date-released: "2026-08-11"
+keywords:
+  - wound healing
+  - multiscale modelling
+  - finite element method
+  - agent-based model
+  - systems biology
+  - SBML
+
+abstract: >-
+  DyCelFEM simulates skin wound healing by coupling a deformable finite-element
+  representation of individual cells to SBML-encoded intracellular reaction
+  networks and inter-cell cytokine diffusion. Cell mechanics, growth, division,
+  apoptosis and chemotactic migration are driven by the molecular state of each
+  cell, allowing tissue-scale healing dynamics to emerge from subcellular
+  signalling.
+
+# The paper. Tools that support it will cite this in preference to the software
+# entry above.
+preferred-citation:
+  type: article
+  title: "Spatio-temporal multiscale cell modeling of skin wound healing"
+  authors:
+    - family-names: Cao
+      given-names: Youfang
+    - family-names: Zhao
+      given-names: Jieling
+    - family-names: Chen
+      given-names: Lin
+    - family-names: DiPietro
+      given-names: "Luisa A."
+    - family-names: Liang
+      given-names: Jie
+  journal: "Biophysical Journal"
+  year: 2026
+  doi: "10.1016/j.bpj.2026.03.021"
+  # TODO: fill in once the corrected proof is paginated
+  # volume:
+  # issue:
+  # start:
+  # end:
